@@ -1,0 +1,1 @@
+using PersonalinformationService as service from '../../srv/personalInfo-service';

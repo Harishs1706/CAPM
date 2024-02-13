@@ -1,0 +1,121 @@
+{
+  "name": "Cap-Project",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.11.0",
+    "@sap-cloud-sdk/resilience": "^3.11.0",
+    "@sap/cds": "^7",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.3"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-personal-info": "cds watch --open personal-info/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa"
+      },
+      "auth": {
+        "[production]": {
+          "strategy": "JWT"
+        },
+        "[development]": {
+          "strategy": "mock",
+          "users": {
+            "108743": {
+              "roles": [
+                "authenticated-user"
+              ]
+            },
+            "sfadmin": {
+              "roles": [
+                "authenticated-user"
+              ]
+            }
+          }
+        }
+      },
+      "ECEmploymentInformation": {
+        "kind": "odata-v2",
+        "model": "srv/external/ECEmploymentInformation",
+        "credentials": {
+          "[production]": {
+            "destination": "",
+            "path": "odata/v2"
+          },
+          "[development]": {
+            "url": "",
+            "authentication": "BasicAuthentication",
+            "path": "/odata/v2",
+            "username": "",
+            "password": ""
+          }
+        }
+      },
+      "ECFoundationOrganization": {
+        "kind": "odata-v2",
+        "model": "srv/external/ECFoundationOrganization",
+        "credentials": {
+          "[production]": {
+            "destination": "",
+            "path": "odata/v2"
+          },
+          "[development]": {
+            "url": "",
+            "authentication": "BasicAuthentication",
+            "path": "/odata/v2",
+            "username": "",
+            "password": ""
+          }
+        }
+      },
+      "FoundationPlatformPLT": {
+        "kind": "odata-v2",
+        "model": "srv/external/FoundationPlatformPLT",
+        "credentials": {
+          "[production]": {
+            "destination": "",
+            "path": "odata/v2"
+          },
+          "[development]": {
+            "url": "",
+            "authentication": "BasicAuthentication",
+            "path": "/odata/v2",
+            "username": "",
+            "password": ""
+          }
+        }
+      },
+      "PLTUserManagement": {
+        "kind": "odata-v2",
+        "model": "srv/external/PLTUserManagement",
+        "credentials": {
+          "[production]": {
+            "destination": "",
+            "path": "odata/v2"
+          },
+          "[development]": {
+            "url": "",
+            "authentication": "BasicAuthentication",
+            "path": "/odata/v2",
+            "username": "",
+            "password": ""
+          }
+        }
+      }
+    }
+  }
+}

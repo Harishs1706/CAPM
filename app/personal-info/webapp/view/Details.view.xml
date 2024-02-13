@@ -1,0 +1,181 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:m="sap.m"
+    xmlns:goals="personalinfo.SharedBlocks.goals"
+	xmlns:personal="personalinfo.SharedBlocks.personal"
+	xmlns:employment="personalinfo.SharedBlocks.employment"
+    controllerName="personalinfo.controller.Details"
+    height="100%">
+    <ObjectPageLayout id="ObjectPageLayout"
+        busy="{personalInfoModel>/busy}"
+        busyIndicatorDelay="0"
+        showTitleInHeaderContent="true"
+        showEditHeaderButton="true"
+        editHeaderButtonPress="handleEditBtnPress"
+        upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <breadcrumbs>
+                    <m:Breadcrumbs id="breadcrumbsId" currentLocationText="Personal Information" >
+                    </m:Breadcrumbs>
+                </breadcrumbs>
+                <expandedHeading>
+                    <m:HBox>
+                        <m:Title text="" wrapping="true"/>
+                        <m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin"/>
+                    </m:HBox>
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:FlexBox  fitContainer="true" alignItems="Center">
+                        <m:Avatar src="{personalInfoModel>/Users/0/photo}" class="sapUiTinyMarginEnd"/>
+                        <m:Title text="{personalInfoModel>/Users/0/defaultFullName}" wrapping="true"/>
+                    </m:FlexBox>
+                </snappedHeading>
+
+                <expandedContent class = "defaultFullNameClass">
+                    <m:Text text="{personalInfoModel>/Users/0/defaultFullName}"/>
+                </expandedContent>
+
+                <snappedContent class = "defaultFullNameClass">
+                    <m:Text text="{personalInfoModel>/Users/0/defaultFullName}"/>
+                </snappedContent>
+
+                <snappedTitleOnMobile class = "defaultFullNameClass">
+                    <m:Title text="{personalInfoModel>/Users/0/defaultFullName}"/>
+                </snappedTitleOnMobile>
+
+                <actions>
+                    <m:OverflowToolbarButton icon="sap-icon://edit" text="edit header" type="Emphasized" tooltip="edit">
+                        <m:layoutData>
+                            <m:OverflowToolbarLayoutData priority="NeverOverflow"/>
+                        </m:layoutData>
+                    </m:OverflowToolbarButton>
+                    <m:OverflowToolbarButton icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down"/>
+                    <m:OverflowToolbarButton icon="sap-icon://show" text="show state" tooltip="show"/>
+                    <m:Button text="Toggle Footer" press="toggleFooter"/>
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox wrap="Wrap">
+                <m:Avatar class="sapUiSmallMarginEnd" src="{personalInfoModel>/Users/0/photo}" displaySize="XL" />
+
+                    <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                        <m:Link text="{personalInfoModel>/Users/0/cellPhone}"/>
+                        <m:Link text="{personalInfoModel>/Users/0/email}"/>
+                    </layout:VerticalLayout>
+
+                    <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                        <m:Image src="./test-resources/sap/uxap/images/linkedin.png"/>
+                        <m:Image src="./test-resources/sap/uxap/images/Twitter.png" class="sapUiSmallMarginBegin"/>
+                    </layout:HorizontalLayout>
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Label text="Hello! I am {personalInfoModel>/Users/0/defaultFullName}"/>
+                    <m:VBox>
+                        <m:Label text="Achieved goals"/>
+                        <m:ProgressIndicator percentValue="30" displayValue="30%"/>
+                    </m:VBox>
+                </layout:VerticalLayout>
+
+                <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                    <m:Label text="{personalInfoModel>/Users/0/country}"/>
+                </layout:VerticalLayout>
+            </m:FlexBox>
+        </headerContent>
+        <sections>
+			<ObjectPageSection titleUppercase="false" id="goalsSection" title="2024 Goals Plan">
+				<heading>
+					<m:MessageStrip text="2024 Goals plan of the Employee." type="Error" />
+				</heading>
+				<subSections>
+					<ObjectPageSubSection id="goalsSectionSS1">
+						<blocks>
+							<goals:GoalsBlock id="goalsblock"/>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection titleUppercase="false" id="personalSection" title="Personal" importance="Medium">
+					<heading>
+						<m:MessageStrip text="Personal Information of the Employee." type="Error" />
+					</heading>
+					<subSections>
+					<ObjectPageSubSection id="personalSectionSS1" title="Connect" titleUppercase="false">
+						<blocks>
+							<personal:BlockPhoneNumber id="phone"/>
+							<personal:BlockSocial id="social"/>
+							<personal:BlockAdresses id="adresses"/>
+							<personal:BlockMailing id="mailing" columnLayout="1"/>
+						</blocks>
+					</ObjectPageSubSection>
+
+					<ObjectPageSubSection id="personalSectionSS2" title="Payment information" titleUppercase="false">
+						<blocks>
+							<personal:PersonalBlockPart1 id="part1" columnLayout="1"/>
+						</blocks>
+						<moreBlocks>
+							<personal:PersonalBlockPart2 id="part2" columnLayout="1"/>
+						</moreBlocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection titleUppercase="false" id="employmentSection" title="Employment">
+				<subSections>
+					<ObjectPageSubSection id="employmentSectionSS1" title="Job information" titleUppercase="false">
+						<blocks>
+							<employment:BlockJobInfoPart1 id="jobinfopart1"/>
+							<employment:BlockJobInfoPart2 id="jobinfopart2"/>
+							<employment:BlockJobInfoPart3 id="jobinfopart3"/>
+						</blocks>
+					</ObjectPageSubSection>
+
+					<ObjectPageSubSection id="employmentSectionSS2" title="Employee Details" importance="Medium" titleUppercase="false">
+						<blocks>
+							<employment:BlockEmpDetailPart1 id="empdetailpart1" columnLayout="1"/>
+						</blocks>
+						<moreBlocks>
+							<employment:BlockEmpDetailPart2 id="empdetailpart2" columnLayout="1"/>
+							<employment:BlockEmpDetailPart3 id="empdetailpart3" columnLayout="1"/>
+						</moreBlocks>
+					</ObjectPageSubSection>
+
+					<ObjectPageSubSection id="employmentSectionSS3" title="Job Relationship" importance="Low" titleUppercase="false">
+						<blocks>
+							<employment:EmploymentBlockJob id="employmentblockjob" showSubSectionMore="true">
+								<employment:mappings>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp1"
+												  externalPath="/Employee/0"/>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp2"
+												  externalPath="/Employee/1"/>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp3"
+												  externalPath="/Employee/2"/>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp4"
+												  externalPath="/Employee/3"/>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp5"
+												  externalPath="/Employee/4"/>
+									<ModelMapping externalModelName="ObjectPageModel" internalModelName="emp6"
+												  externalPath="/Employee/5"/>
+								</employment:mappings>
+							</employment:EmploymentBlockJob>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+
+        
+        <footer>
+            <m:OverflowToolbar>
+                <m:ToolbarSpacer />
+                <m:Button type="Accept" text="Accept"/>
+                <m:Button type="Reject" text="Reject"/>
+            </m:OverflowToolbar>
+        </footer>
+    </ObjectPageLayout>
+</mvc:View>
